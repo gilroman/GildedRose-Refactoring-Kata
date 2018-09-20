@@ -8,7 +8,7 @@ class GildedRose
     @items.each do |item|
       case item.name
       when "Aged Brie"
-        update_aged_brie(item)
+        return update_aged_brie(item)
       when "Backstage passes to a TAFKAL80ETC concert"
         update_backstage_passes(item)
       when "normal"
@@ -20,13 +20,8 @@ class GildedRose
   end
   
   def update_aged_brie(item)
-    if item.sell_in < 0
-      item.quality = item.quality + 2
-    else
-      item.quality = item.quality + 1
-    end
-    item.quality = 50 if item.quality > 50
-    item.sell_in = item.sell_in - 1
+    @item = Brie.new(item)
+    @item.update_quality 
   end
 
   def update_backstage_passes(item)
@@ -50,6 +45,23 @@ class GildedRose
   def update_sulfuras(item)
   end
 
+end
+
+class Brie
+  attr_reader :item
+  def initialize(item)
+    @item = item
+  end
+
+  def update_quality
+    if item.sell_in < 0
+      item.quality = item.quality + 2
+    else
+      item.quality = item.quality + 1
+    end
+    item.quality = 50 if item.quality > 50
+    item.sell_in = item.sell_in - 1
+  end
 end
 
 class Item
