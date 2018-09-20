@@ -35,8 +35,9 @@ class GildedRose
   end
 
   def update_sulfuras(item)
+    @item = Sulfuras.new(item)
+    @item.update_quality
   end
-
 end
 
 class BackstagePasses
@@ -88,6 +89,17 @@ class Normal
     end
     item.quality = 0 if item.quality < 0
     item.sell_in = item.sell_in - 1
+  end
+end
+
+class Sulfuras
+  attr_reader :item
+
+  def initialize(item)
+    @item = item
+  end
+
+  def update_quality
   end
 end
 
