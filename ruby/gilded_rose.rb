@@ -25,11 +25,8 @@ class GildedRose
   end
 
   def update_backstage_passes(item)
-    item.quality = item.quality + 1 if item.sell_in > 10
-    item.quality = item.quality + 2 if item.sell_in > 5 && item.sell_in <= 10
-    item.quality = item.quality + 3 if item.sell_in < 6
-    item.quality = 0 if item.sell_in < 1
-    item.sell_in = item.sell_in - 1
+    @item = BackstagePasses.new(item)
+    @item.update_quality
   end
 
   def update_normal(item)
@@ -47,8 +44,25 @@ class GildedRose
 
 end
 
+class BackstagePasses
+  attr_reader :item
+  
+  def initialize(item)
+    @item = item
+  end
+
+  def update_quality
+    item.quality = item.quality + 1 if item.sell_in > 10
+    item.quality = item.quality + 2 if item.sell_in > 5 && item.sell_in <= 10
+    item.quality = item.quality + 3 if item.sell_in < 6
+    item.quality = 0 if item.sell_in < 1
+    item.sell_in = item.sell_in - 1
+  end
+end
+
 class Brie
   attr_reader :item
+  
   def initialize(item)
     @item = item
   end
