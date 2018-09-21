@@ -39,6 +39,10 @@ class BackstagePasses
     item.quality = item.quality + 2 if item.sell_in > 5 && item.sell_in <= 10
     item.quality = item.quality + 3 if item.sell_in < 6
     item.quality = 0 if item.sell_in < 1
+    update_sell_in
+  end
+
+  def update_sell_in
     item.sell_in = item.sell_in - 1
   end
 end
@@ -57,6 +61,10 @@ class Brie
       item.quality = item.quality + 1
     end
     item.quality = 50 if item.quality > 50
+    update_sell_in
+  end
+
+  def update_sell_in
     item.sell_in = item.sell_in - 1
   end
 end
@@ -75,6 +83,10 @@ class Normal
       item.quality = item.quality - 1 
     end
     item.quality = 0 if item.quality < 0
+    update_sell_in
+  end
+
+  def update_sell_in
     item.sell_in = item.sell_in - 1
   end
 end
@@ -87,6 +99,9 @@ class Sulfuras
   end
 
   def update_quality
+  end
+
+  def update_sell_in
   end
 end
 
